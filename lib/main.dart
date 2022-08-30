@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MaterialApp(
+    home: MyHomePage(),
+  ));
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -27,31 +30,47 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int count = 10;
+  int y=0;
+  void minus(){
+    setState(() {
+      count-=5;
+      y+=0;
+    });
+  }
 
   void func() {
     setState(() {
       count += 5;
     });
 
-    print('Button pressed: $count');
+    //print('Button pressed: $count');
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Container(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 290, horizontal: 150),
-        child: Column(
+    return MaterialApp(
+      home: Scaffold(
+          body: Container(
+        child:  Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Count:$count'),
-            TextButton(
-              onPressed: func,
-              child: Text('BUTTON'),
-            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  //Text('Count:$y'),
+                  TextButton(onPressed: minus, child: Text('-',style: TextStyle(fontSize: 50),)),
+                  Text('Count:$count'),
+                  TextButton(
+                    onPressed: func,
+                    child: Text('+',style: TextStyle(fontSize: 50),),
+                  ),
+    
+                ],
+              ),
           ],
         ),
+        ),
       ),
-    ));
+    );
   }
 }
